@@ -23,36 +23,41 @@ run_analysis <- function()
   library(tidyr)
   library(reshape2)
     
+  # read feature and acivity data from files
   feature.column.data <- read.table("features.txt")
   activity.column.data <- read.table("activity_labels.txt", header = FALSE)
   
+  # read training data from files
   subject.training.data <- read.table("train/subject_train.txt", header = FALSE)
   activity.training.data <- read.table("train/y_train.txt", header = FALSE)
   feature.training.data <- read.table("train/X_train.txt", header = FALSE)
   
+  # read test data from files
   subject.test.data <- read.table("test/subject_test.txt", header = FALSE)
   activity.test.data <- read.table("test/y_test.txt", header = FALSE)
   feature.test.data <- read.table("test/X_test.txt", header = FALSE)
   
+  # combine test and training dta
   subject.data <- rbind(subject.training.data, subject.test.data)
   activity.data <- rbind(activity.training.data, activity.test.data)
   feature.data <- rbind(feature.training.data, feature.test.data)
   
-  #testing
+  #preliminary columns
   colnames(feature.data) <- t(feature.column.data[2])
   colnames(activity.data) <- "Activity"
   colnames(subject.data) <- "Subject"
   
+  # combine all data
   complete.data <- cbind(subject.data, activity.data, feature.data)
-  #complete.data <- cbind(feature.data, activity.data, subject.data)
   
+  # retain only the columns that contain subject, activity, mean and standard deviation metrics
   columns.with.mean.std <- grep(".*Mean.*|.*Std.*", names(complete.data), ignore.case=TRUE)
   required.columns <- c(1, 2, columns.with.mean.std)
-  #required.columns <- c(columns.with.mean.std, 562, 563)
   extracted.data <- complete.data[,required.columns]
   
   extracted.data <- data.table(extracted.data)
   
+  # convert numeric activity values to descriptions
   extracted.data$Activity <- as.character(extracted.data$Activity)
   for (i in 1:6)
     {
@@ -61,33 +66,26 @@ run_analysis <- function()
   
   extracted.data$Activity <- as.factor(extracted.data$Activity)
   
+  # clean up column names for readability
   names(extracted.data)<-gsub("Acc", "Accelerometer", names(extracted.data))
-  names(extracted.data)<-gsub("Gyro", "Gyroscope", names(extracted.data))
+  names(extracted.data)<-gsub("angle", "Angle", names(extracted.data))
   names(extracted.data)<-gsub("BodyBody", "Body", names(extracted.data))
-  names(extracted.data)<-gsub("Mag", "Magnitude", names(extracted.data))
-  names(extracted.data)<-gsub("^t", "Time", names(extracted.data))
+  names(extracted.data)<-gsub("-freq()", "Frequency", names(extracted.data), ignore.case = TRUE)
   names(extracted.data)<-gsub("^f", "Frequency", names(extracted.data))
-  names(extracted.data)<-gsub("tBody", "TimeBody", names(extracted.data))
+  names(extracted.data)<-gsub("Gyro", "Gyroscope", names(extracted.data))
+  names(extracted.data)<-gsub("gravity", "Gravity", names(extracted.data))
+  names(extracted.data)<-gsub("Mag", "Magnitude", names(extracted.data))
   names(extracted.data)<-gsub("-mean()", "Mean", names(extracted.data), ignore.case = TRUE)
   names(extracted.data)<-gsub("-std()", "Standard", names(extracted.data), ignore.case = TRUE)
-  names(extracted.data)<-gsub("-freq()", "Frequency", names(extracted.data), ignore.case = TRUE)
-  names(extracted.data)<-gsub("angle", "Angle", names(extracted.data))
-  names(extracted.data)<-gsub("gravity", "Gravity", names(extracted.data))
-  
-  #testing
-  #colnames(extracted.data) <- as.character(c("Subject", "Activity", feature.column.data))
-  
-  #testing
-  #extracted.data$Activity <- factor(extracted.data$Activity, levels = activity.column.data[,1], labels = activity.column.data[,2])
+  names(extracted.data)<-gsub("^t", "Time", names(extracted.data))
+  names(extracted.data)<-gsub("tBody", "TimeBody", names(extracted.data))
   
   extracted.data$Subject <- as.factor(extracted.data$Subject)
-  #extracted.data <- data.table(extracted.data)
+  extracted.data <- arrange(extracted.data, Subject, Activity)
   
-  extracted.data <- extracted.data[order(extracted.data$Subject,extracted.data$Activity),]
-  
-  # melt (reduce) data table
-  final.data <- melt(extracted.data, id = c("Subject", "Activity"))
-  final.data.mean <- dcast(final.data, Subject + Activity ~ variable, mean)
+  # group and summarize data table
+  final.data <- group_by(extracted.data, Subject, Activity)  
+  final.data.mean <- summarize_each(final.data, funs(mean))
   
   # write data to .csv for review in Excel
   write.csv(final.data.mean, file = "Tidy.txt", row.names = FALSE)
