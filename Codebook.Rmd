@@ -1,0 +1,26 @@
+---
+title: "Codebook"
+author: "Dwayne Macadangdang"
+date: "September 2, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Codebook For run_analysis.R
+
+Data for this project was collected from the following study: Human Activity Recognition Using Smartphones Data Set 
+
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+
+Experimental Design and Background
+From the website: "The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data."
+
+Raw Data
+The accelerometer inertial signal data are stored in files by training and test sets, then by x and y axis. The original feature names (columns) are contained in the file "features.txt" in this repository. The six activity labels are available in the file "activity_labels.txt", also in this repository.
+
+Variables (in alphabetical order)
+The variable (column) names used in this project are saved in the repository file "final_column_names.txt".
+
