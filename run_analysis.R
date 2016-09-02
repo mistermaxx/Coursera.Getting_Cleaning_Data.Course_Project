@@ -1,5 +1,5 @@
 # |*****************************************************************************
-# | Dwayne Macadangdang 9/1/2016
+# | Dwayne Macadangdang 9/2/2016
 # | Coursera: Getting and Cleaning Data
 # | Week 4 Programming Assignment
 
@@ -64,18 +64,18 @@ run_analysis <- function()
     }
   
   # clean up column names for readability
-  names(extracted.data)<-gsub("Acc", "Accelerometer", names(extracted.data))
-  names(extracted.data)<-gsub("angle", "Angle", names(extracted.data))
-  names(extracted.data)<-gsub("BodyBody", "Body", names(extracted.data))
-  names(extracted.data)<-gsub("-freq()", "Frequency", names(extracted.data), ignore.case = TRUE)
-  names(extracted.data)<-gsub("^f", "Frequency", names(extracted.data))
-  names(extracted.data)<-gsub("Gyro", "Gyroscope", names(extracted.data))
-  names(extracted.data)<-gsub("gravity", "Gravity", names(extracted.data))
-  names(extracted.data)<-gsub("Mag", "Magnitude", names(extracted.data))
-  names(extracted.data)<-gsub("-mean()", "Mean", names(extracted.data), ignore.case = TRUE)
-  names(extracted.data)<-gsub("-std()", "Standard", names(extracted.data), ignore.case = TRUE)
-  names(extracted.data)<-gsub("^t", "Time", names(extracted.data))
-  names(extracted.data)<-gsub("tBody", "TimeBody", names(extracted.data))
+  names(extracted.data) <- gsub("Acc", "Accelerometer", names(extracted.data))
+  names(extracted.data) <- gsub("angle", "Angle", names(extracted.data))
+  names(extracted.data) <- gsub("BodyBody", "Body", names(extracted.data))
+  names(extracted.data) <- gsub("-freq()", "Frequency", names(extracted.data), ignore.case = TRUE)
+  names(extracted.data) <- gsub("^f", "Frequency", names(extracted.data))
+  names(extracted.data) <- gsub("Gyro", "Gyroscope", names(extracted.data))
+  names(extracted.data) <- gsub("gravity", "Gravity", names(extracted.data))
+  names(extracted.data) <- gsub("Mag", "Magnitude", names(extracted.data))
+  names(extracted.data) <- gsub("-mean()", "Mean", names(extracted.data), ignore.case = TRUE)
+  names(extracted.data) <- gsub("-std()", "Standard", names(extracted.data), ignore.case = TRUE)
+  names(extracted.data) <- gsub("^t", "Time", names(extracted.data))
+  names(extracted.data) <- gsub("tBody", "TimeBody", names(extracted.data))
   
   # arrange, group and summarize data table using dplyr verbs
   extracted.data <- arrange(extracted.data, Subject, Activity)
