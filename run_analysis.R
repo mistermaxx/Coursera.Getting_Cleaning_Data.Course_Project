@@ -12,16 +12,15 @@
 # |    the average of each variable for each activity and each subject.
 # |*****************************************************************************
 
-# set working directory, load library dependencies (assumes installation)
+
 run_analysis <- function()
 {
   print("Commencing analysis.")
   
+  # set working directory, load library dependencies (assumes installation)
   setwd("/Users/mistermaxx/Documents/work/personal/Coursera/Getting_Cleaning_Data/Week_4/UCI_HAR_Dataset")
   library(data.table)
   library(dplyr)
-  library(tidyr)
-  library(reshape2)
     
   # read feature and acivity data from files
   feature.column.data <- read.table("features.txt")
@@ -64,8 +63,6 @@ run_analysis <- function()
       extracted.data$Activity[extracted.data$Activity == i] <- as.character(activity.column.data[i,2])
     }
   
-  extracted.data$Activity <- as.factor(extracted.data$Activity)
-  
   # clean up column names for readability
   names(extracted.data)<-gsub("Acc", "Accelerometer", names(extracted.data))
   names(extracted.data)<-gsub("angle", "Angle", names(extracted.data))
@@ -80,10 +77,8 @@ run_analysis <- function()
   names(extracted.data)<-gsub("^t", "Time", names(extracted.data))
   names(extracted.data)<-gsub("tBody", "TimeBody", names(extracted.data))
   
-  extracted.data$Subject <- as.factor(extracted.data$Subject)
+  # arrange, group and summarize data table using dplyr verbs
   extracted.data <- arrange(extracted.data, Subject, Activity)
-  
-  # group and summarize data table
   final.data <- group_by(extracted.data, Subject, Activity)  
   final.data.mean <- summarize_each(final.data, funs(mean))
   
@@ -91,4 +86,5 @@ run_analysis <- function()
   write.csv(final.data.mean, file = "Tidy.txt", row.names = FALSE)
   
   print("Analysis complete.")
+  
 }
