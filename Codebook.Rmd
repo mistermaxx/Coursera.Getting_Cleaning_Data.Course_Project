@@ -1,12 +1,5 @@
 ## Codebook For run_analysis.R
 
----
-title: "Codebook"
-author: "Dwayne Macadangdang"
-date: "September 2, 2016"
-output: html_document
----
-
 Data for this project was collected from the following study: Human Activity Recognition Using Smartphones Data Set 
 
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
@@ -22,5 +15,7 @@ Steps: downloaded data, read from all test and training files as well as the act
 
 The final variable (column) names used in this project are saved in the repository file "final_column_names.txt".
 
-The data can be verified to be "tidy" by viewing the file "Tidy.xlsx" in the repository
+The data can be verified to be "tidy" by viewing the file "Tidy.xlsx" in the repository.
+* Each variable name is unique (using Highlight Cell Rules > Duplicate Values...)
+* Each observation is saved in its own row (30 subjects, 6 activities each = 180 rows)
 
