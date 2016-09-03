@@ -13,3 +13,16 @@ The repository contains the following files:
 * run_analysis.R - required script to process the data
 * Tidy.txt - required output file in .csv format
 * Tidy.xlsx - Excel import of Tidy.txt to verify that the data is tidy
+
+## Script
+* Sets working directory, load library dependencies 
+* Reads the activity and feature data from files
+* Reads the training and test data from files
+* Combines training and test data
+* Creates preliminary columns
+* Combines all data
+* Reduces data to only the columns that contain subject, activity, mean and standard deviation metrics
+* Converts numeric activity values to descriptions
+* Cleans up column names for readability
+* Arrange, group and summarize (mean) data table using dplyr verbs
+* Write data to text file output
