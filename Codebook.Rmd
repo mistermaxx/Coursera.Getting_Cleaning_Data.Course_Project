@@ -1,6 +1,7 @@
-## Codebook For run_analysis.R
+# Codebook For run_analysis.R
+## Getting And Cleaning Data Course Project | Coursera
 
-By Dwayne Macadangdang
+### By Dwayne Macadangdang
 
 Data for this project was collected from the following study: Human Activity Recognition Using Smartphones Data Set 
 
