@@ -83,7 +83,7 @@ run_analysis <- function()
   final.data.mean <- summarize_each(final.data, funs(mean))
   
   # write data to .csv for review in Excel
-  write.csv(final.data.mean, file = "Tidy.txt", row.names = FALSE)
+  write.table(final.data.mean, file = "Tidy.txt", row.names = FALSE)
   
   print("Analysis complete.")
   
