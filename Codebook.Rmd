@@ -1,5 +1,7 @@
 ## Codebook For run_analysis.R
 
+By Dwayne Macadangdang
+
 Data for this project was collected from the following study: Human Activity Recognition Using Smartphones Data Set 
 
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
@@ -18,4 +20,5 @@ The final variable (column) names used in this project are saved in the reposito
 The data can be verified to be "tidy" by viewing the file "Tidy.xlsx" in the repository.
 * Each variable name is unique (using Highlight Cell Rules > Duplicate Values...)
 * Each observation is saved in its own row (30 subjects, 6 activities each = 180 rows)
+* The file stores one kind of observation.
 
