@@ -14,7 +14,7 @@ From the website: "The experiments have been carried out with a group of 30 volu
 The accelerometer inertial signal data are stored in files by training and test sets, then by x and y axis. The original feature names (columns) are contained in the file "features.txt" in this repository. The six activity labels are available in the file "activity_labels.txt", also in this repository.
 
 ### Processed Data
-Steps: downloaded data, read from all test and training files as well as the activity and feature files as dataframes, combined test and training data into a dataframe, reduced data to only the desired columns (subject, activity, columns containing mean or stand deviation) and converted to a datatable, replaced numeric activity values with descriptions, edited column names for readability, arranged/grouped/summarized the data, wrote out the data to a .csv file to be able to review in Excel.
+Steps: downloaded data, read from all test and training files as well as the activity and feature files as dataframes, combined test and training data into a dataframe, reduced data to only the desired columns (subject, activity, columns containing mean or stand deviation) and converted to a datatable, replaced numeric activity values with descriptions, edited column names for readability, arranged/grouped/summarized the data, wrote data to output file.
 
 The final variable (column) names used in this project are saved in the repository file "final_column_names.txt".
 
